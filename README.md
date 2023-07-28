@@ -1,4 +1,4 @@
-### Types de variables
+## Types de variables
 - Insensible à la class_hommeEn majuscules pour les var globales
 - en minuscules pour les variables locales
 
@@ -19,7 +19,7 @@ dico: &{dict}   a=1 b=2
 
 ### Manipules les variables: OPérations
 
-#### Variable scalaire
+### Variable scalaire
     - Commence par${nomDeLaVar}
     - si la valeur n'est pas une chaine de caractère, on peut éliminer les {}
 
@@ -34,7 +34,7 @@ ${opmath}     Evaluate     2000+7-1000*2
 ${mot}      Evaluate    '''ch'ine'''
 ${logique}  Evaluate    0<${opmath}<30
 
-##### Liste
+## Liste
 - commence par @{nomDeLaListe}
 - par défaut, index 0
 - pour accéder à un élément => ${liste}[index]
@@ -49,7 +49,7 @@ exemple Keywords
 - Get From List : Récupère l'élément associé à l'index donné
     - ${tmp}    Get From List   ${list}     2
 
-#### Dictionnaires
+## Dictionnaires
 - commence par &{nomDeLaListe}
 - pour accéder à un élément => ${Liste.key}
 
@@ -81,13 +81,13 @@ Set Variable If
     - Utilisables dans les TestCase /keyword
     - Plusieurs types
 
-#### FOR    IN
+### FOR    IN
 ```
 FOR     ${élém}   IN    list
     instructions
 END
 ```
-##### FOR   IN RANGE
+### FOR   IN RANGE
 ```
 FOR     ${elem}    IN RANGE [Plage]
     instructions
@@ -99,7 +99,7 @@ Plage:
 - Une plage et un pas: 2    10  2
 - Une variable
  
-#### FOR     IN ENUMERATE
+### FOR     IN ENUMERATE
 ```
 FOR     ${index}    ${elem}     IN ENUMERATE    [element à parcourir]   start=1
     instructions
@@ -107,14 +107,14 @@ END
 ```
 Attention si tu veux parcourir une liste il faut mettre @{list} plutot que ${list}
 
-#### FOR IN ZIP
+### FOR IN ZIP
 ```
 FOR    ${l1-element}    ${l2-element}    IN ZIP    ${LIST-1}    ${LIST-2}   mode    LONGUEST/SHORTEST/STRICT    fill    0
     Log    ${l1-element} - ${l2-element}
 END
 ```
 
-#### BOUCLE WHILE
+### BOUCLE WHILE
 ```
 WHILE    $var_in_py_expr1 == $var_in_py_expr2   Limit=[une limite]
     instructions        
@@ -125,3 +125,26 @@ Conditions:
 Limite:
 - nombre d'itération: Limit=10
 - nombre de secondes: Limit=1 seconds
+
+### Les Arguments
+Principe
+- Créer un keyword avec des paramètres en entrée
+- Retourner une ou plusieurs variables en sortie d'un keyword
+
+```
+Récupérer les données
+    ${login}    SET VARIABLE    standard_user
+    ${mdp}    SET VARIABLE    secret_sauce
+    ${url}    SET VARIABLE    https://www.saucedemo.com
+    ${browser}    SET VARIABLE    gc
+    [Return]    ${url}  ${browser}  ${login}    ${mdp}
+CONNEXION
+    [ARGUMENTS]     ${url}  ${browser}  ${login}    ${mdp}
+    Open Browser    ${url}  ${browser}
+    Input Text  data:test:username  ${login}
+    Input Password  data:test:password  ${mdp}
+    Click Button    data:test:login-button
+
+```
+
+## Tests Front End
