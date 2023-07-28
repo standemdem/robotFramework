@@ -99,4 +99,29 @@ Plage:
 - Une plage et un pas: 2    10  2
 - Une variable
  
-FOR     IN ENUMERATE
+#### FOR     IN ENUMERATE
+```
+FOR     ${index}    ${elem}     IN ENUMERATE    [element à parcourir]   start=1
+    instructions
+END
+```
+Attention si tu veux parcourir une liste il faut mettre @{list} plutot que ${list}
+
+#### FOR IN ZIP
+```
+FOR    ${l1-element}    ${l2-element}    IN ZIP    ${LIST-1}    ${LIST-2}   mode    LONGUEST/SHORTEST/STRICT    fill    0
+    Log    ${l1-element} - ${l2-element}
+END
+```
+
+#### BOUCLE WHILE
+```
+WHILE    $var_in_py_expr1 == $var_in_py_expr2   Limit=[une limite]
+    instructions        
+END
+```
+Conditions:
+- Deux listes / une liste regroupant les 2
+Limite:
+- nombre d'itération: Limit=10
+- nombre de secondes: Limit=1 seconds

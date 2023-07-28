@@ -1,4 +1,5 @@
 Library    OperatingSystem
+Library    Collections
 *** Settings ***
 *** Variables ***
 @{cities}=    Paris    Rennes    Marseille
@@ -29,5 +30,39 @@ Library    OperatingSystem
     ${len}=    Evaluate   len(${cities})
     FOR    ${counter}    IN RANGE    0    ${len}
         Log    ${counter}
+        Log    je mange du caca et j'adore ça . Gros bizou
+    END
+7 Je teste la boucle FOR IN ENUMERATE
+    FOR    ${index}    ${element}    IN ENUMERATE    @{cities}
+        Log    ${index}: ${element}
+        
+    END
+8 Je teste la boucle FOR IN ENUMERATE avec un dico
+    FOR    ${index}    ${key}    ${value}    IN ENUMERATE    &{city_dict}
+        Log    ${index}: ${key} : ${value}
+        
+    END
+9 Je teste la boucle FOR IN zip avec LONGEST
+    @{countries}=    Create List    France    Japan    Germany
+    @{new_cities}=    Create List    Paris    Tokyo    Berlin    London
+    FOR    ${country}    ${city}    IN ZIP    ${countries}    ${new_cities}    mode=LONGEST    fill=unknown
+        Log    ${country} - ${city}
+        
+    END
+10 Je teste la boucle FOR IN zip avec SHORTEST
+    @{countries}=    Create List    France    Japan    Germany
+    @{new_cities}=    Create List    Paris    Tokyo    Berlin    London
+    FOR    ${country}    ${city}    IN ZIP    ${countries}    ${new_cities}    mode=SHORTEST    fill=unknown
+        Log    ${country} - ${city}
+        
+    END
+11 Je teste la boucle WHILE
+    ${objectif}    ${epargne}    Set Variable    50000    0
+    ${nbjour}    ${age}    Set Variable    0    54
+    WHILE    ${epargne}<${objectif}
+        ${epargne}    Evaluate    ${epargne}+1500
+        ${nbjour}    Evaluate    ${nbjour}+1
+        Log    ${epargne} - jour:${nbjour}
+        
     END
 *** Keywords ***
