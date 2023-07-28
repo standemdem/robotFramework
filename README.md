@@ -74,3 +74,29 @@ END
 
 Autre écriture: Run Keyword if / Run Keyword Unless
 Set Variable If
+
+### Les boucles
+- Principe
+    - Répéter les mêmes actions plusieurs fois
+    - Utilisables dans les TestCase /keyword
+    - Plusieurs types
+
+#### FOR    IN
+```
+FOR     ${élém}   IN    list
+    instructions
+END
+```
+##### FOR   IN RANGE
+```
+FOR     ${elem}    IN RANGE [Plage]
+    instructions
+END
+```
+Plage:
+- Une limite: ex 5
+- Un début et une fin: 2    9
+- Une plage et un pas: 2    10  2
+- Une variable
+ 
+FOR     IN ENUMERATE
