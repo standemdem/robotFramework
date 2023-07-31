@@ -8,31 +8,22 @@ Library    SeleniumLibrary
 Library    XML
 Resource    ressources/keyword.robot
 Resource    ressources/variables.robot
+Test Setup       openNewBrowser    ${website_url}
+Test Teardown    closeConnexion
  
 *** Test Cases ***
 1 Se connecter avec bon log et mdp
-    Open Browser    https://www.saucedemo.com/v1/index.html    Chrome
-    Sleep    0.5
-    Input Text    xpath=//*[@id="user-name"]    standard_user
-    Sleep    0.5
-    Input Text    xpath=//*[@id="password"]    secret_sauce
-    Click Button    xpath=//*[@id="login-button"]
-    Sleep    0.5
-# verifier la connexion
+    connectToSite   standard_user    secret_sauce
+    # verifier la connexion
     ${currentUrl}    Get Location
     Should Contain    ${currentUrl}    /inventory.html
-    Close Browser
 
 2 Se connecter avec mdp mais pas de user
-    Open Browser    https://www.saucedemo.com/v1/index.html    Chrome
-    Sleep    0.5
-    Input Text    xpath=//*[@id="password"]    secret_sauce
-    Click Button    xpath=//*[@id="login-button"]
-    Sleep    0.5
-# Verification
+    connectToSite    ${EMPTY}    secret_sauce
+    # Verification
     Element Text Should Be    //*[@id="login_button_container"]/div/form/h3    Epic sadface: Username is required
-    Close Browser
 3 Se connecter avec user mais pas de mdp
+    [Tags]    erreur
     Open Browser    https://www.saucedemo.com/v1/index.html    Chrome
     Sleep    0.5
     Input Text    xpath=//*[@id="user-name"]    standard_user

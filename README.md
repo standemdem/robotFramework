@@ -147,4 +147,11 @@ CONNEXION
 
 ```
 
-## Tests Front End
+## Setup & Teardown
+Setup: ce qui se fait en amont
+Teardown: ce qui se fait en aval
+```
+*** Settings ***
+Setup   connexion
+Teardown    deconnexion
+```
